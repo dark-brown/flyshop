@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Controllers\Customer;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use Auth;
+
+class DashboardController extends Controller
+{
+    public function index()
+    {
+        $param = [
+    		'avatar' 		=> null,
+    		'login'			=> false
+    	];
+
+    	if(Auth::check())
+    	{
+    		$param['login'] = true;
+    		$param['avatar'] = Auth::user()['portfolio'] ? Auth::user()['portfolio'] : "default.jpg";
+    	}
+
+        $param = json_encode($param);
+        
+        return view('customer.home', compact('param'));
+    }
+}
