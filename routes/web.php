@@ -37,6 +37,21 @@ Route::group(['middleware' => ['auth']], function () {
             return redirect('/customer-dashboard');
         }
     });
+
+    Route::get('/setting', function () {
+        if(Auth::user()->role == 0)
+        {
+            return redirect('/admin-setting');
+        }
+        else if(Auth::user()->role == 1)
+        {
+            return redirect('/delivery-setting');
+        }
+        else if(Auth::user()->role == 2)
+        {
+            return redirect('/customer-setting');
+        }
+    });
 });
 
 /*
@@ -48,7 +63,20 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::group(['namespace'=>'Admin'], function () {
         Route::get('/admin-dashboard', 'DashboardController@index');
-        
+        Route::get('/admin-setting', 'SettingController@index');
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Delivery Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['middleware' => ['delivery']], function () {
+
+    Route::group(['namespace'=>'Delivery'], function () {
+        Route::get('/delivery-dashboard', 'DashboardController@index');
+        Route::get('/delivery-setting', 'SettingController@index');
     });
 });
 
@@ -61,6 +89,6 @@ Route::group(['middleware' => ['customer']], function () {
 
     Route::group(['namespace'=>'Customer'], function () {
         Route::get('/customer-dashboard', 'DashboardController@index');
-        
+        Route::get('/customer-setting', 'SettingController@index');
     });
 });

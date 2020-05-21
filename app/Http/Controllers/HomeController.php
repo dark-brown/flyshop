@@ -25,15 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $param = [
+			$param = [
     		'avatar' 		=> null,
-    		'login'			=> false
+				'login'			=> false,
+				'role'			=> -1
     	];
 
     	if(Auth::check())
     	{
     		$param['login'] = true;
-    		$param['avatar'] = Auth::user()['portfolio'] ? Auth::user()['portfolio'] : "default.jpg";
+				$param['avatar'] = Auth::user()['portfolio'] ? Auth::user()['portfolio'] : "default.jpg";
+				$param['role'] = Auth::user()['role'];
     	}
 
         $param = json_encode($param);

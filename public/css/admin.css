@@ -1,0 +1,68 @@
+.user-list-part {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.table th, 
+.table td {
+  border-top: 0;
+}
+
+.table thead th {
+  border-bottom: 2px solid #df285a;
+}
+
+.table thead th.th-account {
+  font-size: 18px;
+}
+
+.table thead th.th-other {
+  font-size: 12px;
+}
+
+.table tfoot th.tf-totals {
+  font-size: 18px;
+}
+
+.table tfoot th.tf-other {
+  font-size: 12px;
+}
+
+.table tfoot th {
+  vertical-align: middle;
+}
+
+.table td {
+  border-bottom: 1px solid #383838;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.img-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #e145fd;
+}
+
+.prev-page, .next-page {
+  color: red;
+}
+
+.page-btn-area {
+  position: relative;
+}
+
+.prev-page:after {
+  /* position: absolute; */
+  content: "";
+  border-right: 1px solid #000000;
+  margin: 0 10px;
+}
+
+.cur-page:after {
+  /* position: absolute; */
+  content: "";
+  border-right: 1px solid #000000;
+  margin: 0 10px;
+}

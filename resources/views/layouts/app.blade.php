@@ -47,7 +47,11 @@
     <!--====== Responsive css ======-->
     <link rel="stylesheet" href="{{ url('public/css/responsive.css') }}">
   
-  
+    <link rel="stylesheet" href="{{ url('public/css/admin.css') }}">
+    
+    <!--====== jquery js ======-->
+    <script src="{{ url('public/js/vendor/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ url('public/js/vendor/jquery-1.12.4.min.js') }}"></script>
 </head>
 
 <body>
@@ -117,12 +121,31 @@
                                 <li class="nav-item">
                                     <a href="{{ url('/about') }}">About Us</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#">Cart Products</a>
-                                    <ul class="sub-menu">
-                                        <li class="li"><a href="{{ url('/cart') }}">Cart</a></li>
-                                    </ul>
-                                </li>
+                            @guest
+                            @else
+                                @if (Auth::user()->role == 0)
+                                    <li class="nav-item">
+                                        <a href="#">Cart Products</a>
+                                        <ul class="sub-menu">
+                                            <li class="li"><a href="{{ url('/cart') }}">Cart</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/setting') }}">Setting</a>
+                                    </li>
+                                @elseif ( Auth::user()->role == 1)
+                                    <li class="nav-item">
+                                        <a href="{{ url('/setting') }}">Setting</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 2)
+                                    <li class="nav-item">
+                                        <a href="#">Cart Products</a>
+                                        <ul class="sub-menu">
+                                            <li class="li"><a href="{{ url('/cart') }}">Cart</a></li>
+                                        </ul>
+                                    </li>
+                                @endif
+                            @endguest
                                 <li class="nav-item">
                                     <a href="{{ url('/contact') }}">Contact Us</a>
                                 </li>
@@ -146,6 +169,9 @@
                                         </a>
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="/setting_profile">
+                                                Setting Profile
+                                            </a>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                             document.getElementById('logout-form').submit();">
@@ -340,68 +366,6 @@
   </a>
 
   <!--====== BACK TO TOP PART ENDS ======-->
-
-  <!--====== ACCOUNT POPPUP PART START ======-->
-
-  <!-- <div class="account-popup-area">
-      <div class="account-popup-wrapper">
-          <div class="account-popup-content">
-              <div class="account-top">
-                  <div class="account-title">
-                      <h3><span>Create an</span> Account</h3>
-                  </div>
-                  <a href="javascript:void(0)" class="popup-close">
-                      <span></span>
-                      <span></span>
-                  </a>
-              </div>
-              <div class="account-form">
-                  <form action="#">
-                      <div class="single-form clearfix">
-                          <div class="form-title text-right">
-                              <p>Email</p>
-                          </div>
-                          <div class="form-input">
-                              <input type="email" name="email" placeholder="Email">
-                          </div>
-                      </div>
-                      <div class="single-form clearfix">
-                          <div class="form-title text-right">
-                              <p>Password</p>
-                          </div>
-                          <div class="form-input">
-                              <input type="password" name="password" placeholder="Password">
-                          </div>
-                      </div>
-                      <div class="single-form clearfix">
-                          <div class="form-title text-right">
-                              <p>Confirm Password</p>
-                          </div>
-                          <div class="form-input">
-                              <input type="password" name="password" placeholder="Password">
-                          </div>
-                      </div>
-                      <div class="single-form clearfix">
-                          <div class="form-input">
-                              <button type="submit">Sing Up</button>
-                          </div>
-                      </div>
-                      
-                  </form>
-                  <div class="single-form clearfix">
-                      <div class="form-input">
-                          <p>Already Have Account? <a href="#">Sing in</a></p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div> -->
-
-  <!--====== ACCOUNT POPPUP PART ENDS ======-->
-    <!--====== jquery js ======-->
-    <script src="{{ url('public/js/vendor/modernizr-3.6.0.min.js') }}"></script>
-    <script src="{{ url('public/js/vendor/jquery-1.12.4.min.js') }}"></script>
 
     <!--====== Bootstrap js ======-->
     <script src="{{ url('public/js/popper.min.js') }}"></script>
